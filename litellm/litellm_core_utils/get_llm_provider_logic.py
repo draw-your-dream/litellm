@@ -113,6 +113,13 @@ def get_llm_provider(  # noqa: PLR0915
     Return model, custom_llm_provider, dynamic_api_key, api_base
     """
     try:
+        if model == "anthropic/kimi-for-coding" or model == "kimi-for-coding":
+            model = "kimi-coding/k2p5"
+            
+        if model == "kimi-coding/k2p5":
+            custom_llm_provider = None
+
+        
         if litellm.LiteLLMProxyChatConfig._should_use_litellm_proxy_by_default(
             litellm_params=litellm_params
         ):
